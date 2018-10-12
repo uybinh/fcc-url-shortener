@@ -33,12 +33,18 @@ urlSchema.statics.getUrlByHash = function(hash) {
 };
 
 urlSchema.statics.createNewUrlAndSave = async function(key, url) {
-  const shortenUrl = new this({
-    key: key,
-    hash: base62.encode(key),
-    url: url
+  return this.findOne({ url: url }).then(url => {
+    if (url) {
+      return url;
+    } else {
+      const shortenUrl = new this({
+        key: key,
+        hash: base62.encode(key),
+        url: url
+      });
+      return shortenUrl.save();
+    }
   });
-  return shortenUrl.save();
 };
 
 urlSchema.statics.findAllUrls = async function() {
