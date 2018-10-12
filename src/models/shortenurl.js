@@ -26,7 +26,7 @@ urlSchema.statics.getLastUrl = function() {
   return this.findOne({}).sort({ createdAt: -1 });
 };
 
-urlSchema.statics.getUrlByHash = function(hash) {
+urlSchema.statics.getUrlByHash = async function(hash) {
   return this.findOne({ hash: hash })
     .then(doc => doc)
     .catch(err => console.log(err));
