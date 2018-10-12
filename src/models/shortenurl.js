@@ -33,9 +33,9 @@ urlSchema.statics.getUrlByHash = async function(hash) {
 };
 
 urlSchema.statics.createNewUrlAndSave = async function(key, url) {
-  return this.findOne({ url: url }).then(url => {
-    if (url) {
-      return url;
+  return this.findOne({ url: url }).then(urlInDatabase => {
+    if (urlInDatabase) {
+      return urlInDatabase;
     } else {
       const shortenUrl = new this({
         key: key,
