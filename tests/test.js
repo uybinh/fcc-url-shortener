@@ -1,4 +1,4 @@
-const Rand = require("./src/components/random");
+const Rand = require("../src/components/random");
 const test = require("tape");
 
 test("random number with n digits", function(t) {

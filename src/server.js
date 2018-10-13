@@ -12,12 +12,12 @@ const Rand = require("./components/random");
 
 const init = function() {
   app
-    .use(express.static(path.join(__dirname, "public")))
-    .set("views", path.join(__dirname, "views"))
-    .set("view engine", "ejs")
+    .use(express.static(path.resolve(__dirname, "../public")))
     .listen(PORT, () => console.log(`App is listening on port ${PORT}`));
 
-  app.get("/", (req, res) => res.render("pages/index"));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../public/index.html"));
+  });
 
   app.post("/api/shorturl/new", urlencodedParser, async (req, res) => {
     const url = req.body.url;
